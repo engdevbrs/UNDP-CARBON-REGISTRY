@@ -14,6 +14,7 @@ import { EventLog } from "@app/shared/entities/event.log.entity";
 import { NationalAccountingController } from "./national-accounting.controller";
 import { SharedModule } from "@app/shared";
 import { CoreModule } from "@app/core";
+import { NationalAccountingModule } from "./national-accounting/national.accounting.module";
 
 @Module({
   imports: [
@@ -30,6 +31,7 @@ import { CoreModule } from "@app/core";
     ]),
     SharedModule,
     CoreModule,
+    NationalAccountingModule,
   ],
   controllers: [ProgrammeController, NationalAccountingController],
   providers: [Logger, AggregateAPIService],

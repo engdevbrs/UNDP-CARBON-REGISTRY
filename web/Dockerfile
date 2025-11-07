@@ -10,8 +10,8 @@ ENV PORT $PORT
 ARG VITE_APP_BACKEND
 ENV VITE_APP_BACKEND $VITE_APP_BACKEND
 
-ARG VITE_APP_COUNTRY_NAME
-ENV VITE_APP_COUNTRY_NAME $VITE_APP_COUNTRY_NAME
+ARG VITE_APP_STATS_URL
+ENV VITE_APP_STATS_URL $VITE_APP_STATS_URL
 
 ARG VITE_APP_COUNTRY_NAME
 ENV VITE_APP_COUNTRY_NAME $VITE_APP_COUNTRY_NAME
@@ -38,6 +38,7 @@ RUN CI=false yarn build
 FROM nginx:stable-alpine
 COPY --from=build /app/dist /usr/share/nginx/html
 COPY ./web/docker-entrypoint.sh /docker-entrypoint.sh
+RUN sed -i 's/\r$//' /docker-entrypoint.sh
 RUN chmod +x /docker-entrypoint.sh
 COPY ./web/nginx.conf /etc/nginx/conf.d/default.conf
 

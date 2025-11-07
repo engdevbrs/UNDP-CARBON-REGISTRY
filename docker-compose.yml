@@ -7,12 +7,12 @@ volumes:
 services:
   db:
     container_name: db
-    image: postgres
+    image: postgres:15
     restart: always
     ports:
       - "5432:5432"
     environment:
-      POSTGRES_PASSWORD: "<ANY PASSOWORD>"
+      POSTGRES_PASSWORD: "carbondev"
       POSTGRES_USER: root
       PSQL_USERNAME: root
       # POSTGRES_HOST_AUTH_METHOD: trust
@@ -31,11 +31,11 @@ services:
     environment:
       DB_HOST: db
       DB_USER: root
-      DB_PASSWORD: "<ANY PASSOWORD>"
+      DB_PASSWORD: "carbondev"
       RUN_MODULE: national-api
-      rootEmail: <ROOT EMAIL>
-      cfAdminEmail: <CLIMATE FUND ADMIN EMAIL>
-      exComAdminEmail: <EXCECUTIVE COMMITTEE ADMIN EMAIL>
+      rootEmail: root@example.com
+      cfAdminEmail: cf-admin@example.com
+      exComAdminEmail: excom@example.com
       Ministry: ""
       Department: ""
       systemCountryCode: "NG"
@@ -86,7 +86,7 @@ services:
     environment:
       DB_HOST: db
       DB_USER: root
-      DB_PASSWORD: "<ANY PASSOWORD>"
+      DB_PASSWORD: "carbondev"
       RUN_PORT: 3100
       RUN_MODULE: analytics-api
       DOMAIN_MAP: "true"
@@ -100,12 +100,12 @@ services:
     environment:
       DB_HOST: db
       DB_USER: root
-      DB_PASSWORD: "<ANY PASSOWORD>"
+      DB_PASSWORD: "carbondev"
       # ,data-importer
       RUN_MODULE: replicator,async-operations-handler
       LOCATION_SERVICE: OPENSTREET
       SMTP_ENDPOINT: email-smtp.us-east-1.amazonaws.com
-      SMTP_USERNAME: ***REMOVED***
+      SMTP_USERNAME: ""
       SMTP_PASSWORD: ""
       IS_EMAIL_DISABLED: "true"
       DISABLE_LOW_PRIORITY_EMAIL: "true"
@@ -141,14 +141,13 @@ services:
       dockerfile: ./web/Dockerfile
       args:
         PORT: 3030
-        REACT_APP_BACKEND: http://localhost:3000
-        REACT_APP_STAT_URL: http://localhost:3100
-        REACT_APP_COUNTRY_NAME: "CountryX"
-        REACT_APP_GOVERNMENT_MINISTRY: "Ministry Of Environment"
-        REACT_APP_COUNTRY_FLAG_URL: "https://carbon-common-dev.s3.amazonaws.com/flag.png"
-        REACT_APP_COUNTRY_CODE: "NG"
-        REACT_APP_MAP_TYPE: "None"
-        REACT_APP_MAPBOXGL_ACCESS_TOKEN: ""
+        VITE_APP_BACKEND: http://localhost:3000
+        VITE_APP_STATS_URL: http://localhost:3100
+        VITE_APP_COUNTRY_NAME: "CountryX"
+        VITE_APP_COUNTRY_FLAG_URL: "https://carbon-common-dev.s3.amazonaws.com/flag.png"
+        VITE_APP_COUNTRY_CODE: "NG"
+        VITE_APP_MAP_TYPE: "None"
+        VITE_APP_MAPBOXGL_ACCESS_TOKEN: ""
     ports:
       - "3030:3030"
     depends_on:
