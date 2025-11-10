@@ -10,7 +10,13 @@ function Write-Info($Message) {
 }
 
 function Invoke-InRepo($ScriptBlock) {
-    $repoRoot = Split-Path -Parent $MyInvocation.MyCommand.Path
+    $repoRoot = if ($PSScriptRoot -and $PSScriptRoot -ne "") {
+        $PSScriptRoot
+    } elseif ($MyInvocation.MyCommand.Path) {
+        Split-Path -Parent $MyInvocation.MyCommand.Path
+    } else {
+        Get-Location
+    }
     Push-Location $repoRoot
     try {
         & $ScriptBlock
