@@ -28,6 +28,7 @@ const Login: FC<LoginPageProps> = (props: LoginPageProps) => {
   const { IsAuthenticated, setUserInfo, isTokenExpired, setIsTokenExpired } =
     useUserContext();
   const { i18n, t } = useTranslation(["common", "login"]);
+  const [form] = Form.useForm();
   const [loading, setLoading] = useState<boolean>(false);
   const [showError, setShowError] = useState<boolean>(false);
   const [errorMsg, setErrorMsg] = useState<string>();
@@ -37,6 +38,10 @@ const Login: FC<LoginPageProps> = (props: LoginPageProps) => {
   const enableRegistration =
     import.meta.env.VITE_APP_ENABLE_REGISTRATION || "true";
   const countryName = import.meta.env.VITE_APP_COUNTRY_NAME || "CountryX";
+  const defaultLoginEmail =
+    import.meta.env.VITE_APP_DEFAULT_LOGIN_EMAIL || "";
+  const defaultLoginPassword =
+    import.meta.env.VITE_APP_DEFAULT_LOGIN_PASSWORD || "";
 
   const handleLanguageChange = (lang: string) => {
     i18n.changeLanguage(lang);
@@ -172,6 +177,11 @@ const Login: FC<LoginPageProps> = (props: LoginPageProps) => {
                   >
                     <div className="login-input-fields-container login-input-fields">
                       <Form
+                        form={form}
+                        initialValues={{
+                          email: defaultLoginEmail,
+                          password: defaultLoginPassword,
+                        }}
                         layout="vertical"
                         onFinish={onSubmit}
                         name="login-details"
@@ -315,7 +325,10 @@ const Login: FC<LoginPageProps> = (props: LoginPageProps) => {
                         onChange={(lan: string) => handleLanguageChange(lan)}
                         optionFilterProp="children"
                         filterOption={(input, option) =>
-                          (option?.label ?? "").includes(input)
+                          (option?.label ?? "")
+                            .toString()
+                            .toLowerCase()
+                            .includes(input.toLowerCase())
                         }
                         filterSort={(optionA, optionB) =>
                           (optionA?.label ?? "")

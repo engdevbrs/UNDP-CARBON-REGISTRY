@@ -89,5 +89,9 @@ Invoke-InRepo {
     Write-Host "  Frontend:   http://localhost:3030/" -ForegroundColor Green
     Write-Host "  API:        http://localhost:3000/national#/" -ForegroundColor Green
     Write-Host "  Estadísticas: http://localhost:3100/stats#/" -ForegroundColor Green
+
+    Write-Info "Estableciendo contraseña por defecto para el usuario root"
+    docker exec -e PGPASSWORD=carbondev db psql -U root -d carbondev -c `
+      "UPDATE \"user\" SET password='Root123!', \"isPending\"=false WHERE role='Root';" | Out-Null
 }
 
