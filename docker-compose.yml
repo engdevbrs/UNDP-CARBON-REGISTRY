@@ -46,8 +46,12 @@ services:
       climateFundName: "Zimbabwe Climate Fund"
       exComName: "Executive Committee"
       logoBase64: "sss"
-      IS_EMAIL_DISABLED: "true"
-      DISABLE_LOW_PRIORITY_EMAIL: "true"
+      IS_EMAIL_DISABLED: "false"
+      DISABLE_LOW_PRIORITY_EMAIL: "false"
+      SOURCE_EMAIL: "contacto@rsynapseai.com"
+      SMTP_ENDPOINT: "gtxm1002.siteground.biz"
+      SMTP_USERNAME: "contacto@rsynapseai.com"
+      SMTP_PASSWORD: "Emma2024."
       EMAILPREFIX: ""
       LOCATION_SERVICE: FILE
       ASYNC_OPERATIONS_TYPE: Database
@@ -104,11 +108,12 @@ services:
       # ,data-importer
       RUN_MODULE: replicator,async-operations-handler
       LOCATION_SERVICE: OPENSTREET
-      SMTP_ENDPOINT: email-smtp.us-east-1.amazonaws.com
-      SMTP_USERNAME: ""
-      SMTP_PASSWORD: ""
-      IS_EMAIL_DISABLED: "true"
-      DISABLE_LOW_PRIORITY_EMAIL: "true"
+      SMTP_ENDPOINT: "gtxm1002.siteground.biz"
+      SMTP_USERNAME: "contacto@rsynapseai.com"
+      SMTP_PASSWORD: "Emma2024."
+      SOURCE_EMAIL: "contacto@rsynapseai.com"
+      IS_EMAIL_DISABLED: "false"
+      DISABLE_LOW_PRIORITY_EMAIL: "false"
       EMAILPREFIX: ""
       ASYNC_OPERATIONS_TYPE: Database
       ITMO_API_KEY: ""
